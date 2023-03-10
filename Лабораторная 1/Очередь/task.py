@@ -8,19 +8,19 @@ class Queue:
     def __init__(self):
         """
         Очередь с помощью python list
-        TODO Описать где начало и конец очереди
+        Начало очереди слева, конец справа (0 1 2 3 4 ...)
         """
-        ...  # TODO инициализировать список
+        self._list = []
 
-    def enqueue(self, elem: Any) -> None:
+    def enqueue(self, elem: Any) -> None:  # O(1)
         """
         Добавление элемент в конец очереди
 
         :param elem: Элемент, который должен быть добавлен
         """
-        ...  # TODO реализовать метод enqueue
+        self._list.append(elem)  # O(1)
 
-    def dequeue(self) -> Any:
+    def dequeue(self) -> Any:  # O(1)
         """
         Извлечение элемента из начала очереди.
 
@@ -28,9 +28,12 @@ class Queue:
 
         :return: Извлеченный с начала очереди элемент.
         """
-        ...  # TODO реализовать метод dequeue
+        if not self._list:
+            raise IndexError("Очередь пуста, невозможно извлечь элемент")
 
-    def peek(self, ind: int = 0) -> Any:
+        return self._list.pop(0)  # O(1)
+
+    def peek(self, ind: int = 0) -> Any:   # O(1)
         """
         Просмотр произвольного элемента, находящегося в очереди, без его извлечения.
 
@@ -41,12 +44,17 @@ class Queue:
 
         :return: Значение просмотренного элемента
         """
-        ...  # TODO реализовать метод peek
+        if not isinstance(ind, int):
+            TypeError("Некорректный тип индекса (должен быть int)")
+        if not 0 <= ind < len(self._list):
+            raise IndexError("Индекс вне границ очереди")
+
+        return self._list[ind]  # O(1)
 
     def clear(self) -> None:
         """ Очистка очереди. """
-        ...  # TODO реализовать метод clear
+        self._list.clear()
 
-    def __len__(self):
+    def __len__(self):  # O(1)
         """ Количество элементов в очереди. """
-        ...  # TODO реализовать метод __len__
+        return len(self._list)
