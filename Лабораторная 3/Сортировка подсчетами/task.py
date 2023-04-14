@@ -12,4 +12,15 @@ def sort(container: Sequence[int]) -> Sequence[int]:
     :param container: Массив, который надо отсортировать
     :return: Отсортированный в порядке возрастания массив
     """
-    ...  # TODO реализовать алгоритм сортировки подсчетами
+    if len(container) == 1:
+        return container
+
+    count = [0] * (max(container) + 1)
+    for item in container:
+        count[item] += 1
+
+    container = []
+    for index, value in enumerate(count):
+        if value != 0:
+            container += [index] * value
+    return container
